@@ -20,6 +20,7 @@ services:
         hard: 65536
     volumes:
       - opensearch-data1:/usr/share/opensearch/data # Creates volume called opensearch-data1 and mounts it to the container
+      #  - ./custom-opensearch.yml:/usr/share/opensearch/config/opensearch.yml
     ports:
       - 9200:9200 # REST API
       - 9600:9600 # Performance Analyzer
@@ -58,6 +59,9 @@ services:
       OPENSEARCH_HOSTS: '["https://opensearch-node1:9200","https://opensearch-node2:9200"]' # Define the OpenSearch nodes that OpenSearch Dashboards will query
     networks:
       - opensearch-net
+    # volumes:
+      # - ./opensearch_dashboards.yml:/usr/share/opensearch-dashboards/config/opensearch_dashboards.yml
+
 
 volumes:
   opensearch-data1:
@@ -73,6 +77,7 @@ volumes:
       o: bind
       type: none
       device: /data/opensearch_data_2
+
 
 networks:
   opensearch-net:
